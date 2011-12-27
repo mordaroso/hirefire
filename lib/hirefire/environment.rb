@@ -38,7 +38,7 @@ module HireFire
 
         base.class_eval do
           after_create  'self.class.hirefire_hire'
-          after_destroy 'self.class.environment.fire'
+          #after_destroy 'self.class.environment.fire'
           after_update  'self.class.environment.fire',
             :unless => Proc.new { |job| job.failed_at.nil? }
         end
@@ -50,7 +50,7 @@ module HireFire
             self.class.hirefire_hire
           end
           after :destroy do
-            self.class.environment.fire
+            #self.class.environment.fire
           end
           after :update do
             self.class.environment.fire unless self.failed_at.nil?
